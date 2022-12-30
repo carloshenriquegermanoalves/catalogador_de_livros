@@ -1,0 +1,95 @@
+Projeto - catalogador de livros:
+    - Motivação:
+       
+        - Utilizar o conceito de orientação a objetos em Python
+        - Permitir a catalogação, busca de informações, exclusão e edição de livros
+
+    - Requisitos de uso:
+        - Python 3 instalado na máquina
+
+    - Como usar:
+        - Rodar o arquivo 'sistema_principal.py'
+        - Um menu aparece para o usuário contendo as seguintes opções:
+            
+            - Digite 1 para ver todos os livros cadastrados:
+
+                - Serão exibidos os títulos dos livros cadastrados
+                - Se não houver livros cadastrados:
+                    - Aparecerá uma mensagem informando que não há livros cadastrados
+            
+            - Digite 2 para cadastrar um novo livro:
+                - Será pedido as seguintes informações para o usuário:
+                    
+                    - Título do livro
+                    - Autor do livro
+                    - Nacionalidade do autor:
+                        - Esta funcionalidade não é obrigatória
+                        - Caso não seja informada, o valor assumido será Desconhecido
+                        - Essa informação é importante para caso o leitor queira fazer uma busca por Nacionalidade
+                    - Gênero do livro
+                    - Sub-gênero do livro
+                    - Quantidade de páginas
+                    - Ano de leitura:
+                        - No caso do leitor ainda não ter lido o livro:
+                            - Será adicionado na lista de leituras pendentes
+                            - Bastará digitar 0 para informar que o livro ainda não foi lido
+                        - No caso do leitor ter lido o livro:
+                            - A informação será guardada para buscas futuras
+                            - Será pedido a nota do livro
+            
+            - Digite 3 para realizar buscas:
+                - As buscas permitidas serão exibidas no seguinte menu com suas respectivas funcionalidades:
+
+                    - Digite 1 para buscar os dados de um livro específico:
+                        - Será requisitado o título do livro
+                        - Será verificado se o livro informado já foi cadastrado
+                        - Se foi cadastrado:
+                            - Será exibido todas as informações salvas daquele livro:
+                                - Nome do autor, nacionalide (caso haja), quantidade de páginas, gênero e etc
+                        - Se não foi cadastrado:
+                            - Exibirá a mensagem informando que não houve cadastrado
+                    
+                    - Digite 2 para buscar os livros do autor informado:
+                        - Será requisitado o autor desejado
+                        - Será verificado se existe algum livro do autor, cadastrado no sistema_principal
+                        - Caso haja:
+                            - Será exibido o título de todos os livros daquele autor
+                        - Caso não haja:
+                            - Exibirá uma mensagem informando que o dado não foi encontrado
+
+                    - Digite 3 para buscar os livros de determinada nacionalidade:
+                        - Será requisitado o nome de um país
+                        - Será verificado se existe algum livro do país informado
+                        - Se houver:
+                            - Serão exibidos os títulos de todos os livros cujo autores são do país informado pelo usuário
+                        - Caso não haja:
+                            - Será exibida uma mensagem informando que não foi encontrado
+
+                    - Digite 4 para buscar livros de um determinado gênero:
+                        - Será requisitado um gênero literário
+                        - Será verificado se há algum livro daquele gênero
+                        - Se houver:
+                            - Retorna os livros pertencentes àquele gênero
+                        - Se não houver:
+                            - Retorna uma mensagem informando que não foi encontrado
+
+                    - Digite 5 para procurar por sub-gêneros:
+                        - Será requisitado um sub-gênero
+                        - Se houver o sub-gênero informado no sistema:
+                            - Retorna os livros pertences àqueles sub-gêneros
+                        - Se não houver:
+                            - Retorna uma mensagem informado que nenhum livro foi encontrado
+
+                    - Digite 6 para procurar por quantidade de páginas:
+                        - Caso o usuário escolha essa opção aparecerá um menu de escolha:
+                            - Digite 1 para procurar livros com mais páginas do que o informado
+                            - Digite 2 para procurar livros com menos páginas do que o informado
+
+                            - Caso o usuário digite 1:
+                                - O programa procurará os livros com a mesma quantidade ou mais de páginas
+
+                            - Caso o usuário digite 2:
+                                - O programa procurará os livros com a mesma quantidade ou menos de páginas
+
+            - Digite 4 para sair do sistema:
+                - O usuário fecha o programa se optar por essa opção
