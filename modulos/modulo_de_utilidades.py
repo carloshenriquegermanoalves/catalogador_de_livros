@@ -11,7 +11,7 @@ def ler_inteiro(valor: str) -> int:
     except:
         erro = True
         while erro == True:
-            valor_inteiro = str(input('{Fore.RED}Digite um número válido:{Fore.RESET}'))
+            valor_inteiro = str(input(f'{Fore.RED}Digite um número válido:{Fore.RESET}'))
             if (valor_inteiro.isnumeric()):
                 valor_inteiro = int(valor_inteiro)
                 erro = False

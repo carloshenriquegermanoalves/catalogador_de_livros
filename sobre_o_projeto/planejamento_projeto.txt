@@ -7,8 +7,14 @@ Projeto - catalogador de livros:
     - Requisitos de uso:
         - Python 3 instalado na máquina
 
+    - Onde os dados serão guardados:
+        - Em um arquivo de texto
+        - Motivo de ser em um arquivo de texto:
+            - O arquivo de texto pode ser gerado sem que o usuário baixe um pacote adicional
+
     - Como usar:
         - Rodar o arquivo 'sistema_principal.py'
+        - Um arquivo de texto chamado Catálogo será criado e nele ficarão salvas as informações
         - Um menu aparece para o usuário contendo as seguintes opções:
             
             - Digite 1 para ver todos os livros cadastrados:

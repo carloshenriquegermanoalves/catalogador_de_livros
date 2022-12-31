@@ -13,8 +13,4 @@ def cria_arquivo(nome_do_arquivo: str) -> None:
 def verifica_arquivo(nome_do_arquivo : str) -> bool:
     if os.path.exists(nome_do_arquivo): #Função que verifica se o arquivo de catálogo existe
         return True
-    else:
-        return False
-
-
-arquivo = cria_arquivo('Catálogo.txt')
+    return False
