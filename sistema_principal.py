@@ -13,12 +13,30 @@ opcao_menu = 0
 
 while opcao_menu != 4:
     lista_de_livros = Livro.listar_livros_do_arquivo(arquivo)
-
+    lista_de_generos = Livro.lista_generos(lista_de_livros)
+    
     cabecalho('MENU PRINCIPAL')
     opcao_menu = menu(['Ver Livros da Biblioteca', 'Cadastrar Livro', 'Buscar Livro', 'Sair do Sistema'])
 
     if opcao_menu == 1:
-        Livro.exibe_todos_os_livros(lista_de_livros)
+        cabecalho('MENU DE EXIBIÇÃO')
+        opcao_exibicao = menu(['Ordem de Aquisição', 'Ordem Alfabética', 'Lista de Gêneros', 'Ordenados Alfabeticamente por Gêneros'])
+        
+        if opcao_exibicao == 1:
+            Livro.exibe_todos_os_livros(lista_de_livros)
+
+        elif opcao_exibicao == 2:
+            livros_ordem_alfabetica = Livro.ordena_livros_alfabeticamente(lista_de_livros)
+            Livro.exibe_livros_alfabeticamente(Livro, livros_ordem_alfabetica)
+    
+        elif opcao_exibicao == 3:
+            Livro.exibe_todos_os_generos(lista_de_generos)
+
+        else:
+            generos_ordem_alfabetica = Livro.ordena_genero_alfabeticamente(lista_de_generos)
+            livros_alfabeticamente_genero = Livro.ordena_livros_alfabeticamente_por_genero(generos_ordem_alfabetica, lista_de_livros)
+            Livro.exibe_todos_os_livros(livros_alfabeticamente_genero, 3)
+
     elif opcao_menu == 2:
         cabecalho('Cadastro de Novo Livro')
 
@@ -30,6 +48,7 @@ while opcao_menu != 4:
         livro = Livro(titulo_do_livro, autor_do_livro, genero_do_livro, quantidade_de_paginas)
         Livro.registrar_livro_no_arquivo(livro, arquivo)
         sleep(1.5)
+
 
     elif opcao_menu == 3:
         cabecalho('MENU DE BUSCA')

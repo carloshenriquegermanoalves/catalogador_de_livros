@@ -79,6 +79,47 @@ class Livro:
 
 
     @classmethod
+    def lista_generos(self : object, lista_de_livros : list) -> list:
+        self.__generos = []
+        for genero in range(len(lista_de_livros)):
+            if lista_de_livros[genero].genero_do_livro not in self.__generos:
+                self.__generos.append(lista_de_livros[genero].genero_do_livro)
+        return self.__generos
+
+
+    @classmethod
+    def ordena_genero_alfabeticamente(self : object, lista_de_generos : set) -> list:
+        lista_de_generos.sort()
+        return lista_de_generos
+
+
+    @classmethod
+    def ordena_livros_alfabeticamente(self : object, lista_de_livros: list) -> list:
+        self.__ordem_alfabetica = []
+        for livro in range(len(lista_de_livros)):
+            self.__ordem_alfabetica.append(lista_de_livros[livro].titulo_do_livro)
+        self.__ordem_alfabetica.sort()
+        return self.__ordem_alfabetica
+
+
+    @classmethod
+    def ordena_livros_alfabeticamente_por_genero(self : object, generos_alfabeticamente : list, lista_de_livros : list) -> list:
+        self.__livros_ordenados_por_generos_alfabeticos = []
+        for genero in range(len(generos_alfabeticamente)):
+            self.__livros_do_genero_indexado = []
+            for livros in range(len(lista_de_livros)):
+                print(lista_de_livros[livros].genero_do_livro)
+                print(generos_alfabeticamente[genero])
+                if lista_de_livros[livros].genero_do_livro in generos_alfabeticamente[genero]:
+                    self.__livros_do_genero_indexado.append(lista_de_livros[livros].titulo_do_livro)
+                    self.__livros_do_genero_indexado.sort()
+                    print(self.__livros_do_genero_indexado)
+            self.__livros_ordenados_por_generos_alfabeticos.append(self.__livros_do_genero_indexado)
+            print(self.__livros_ordenados_por_generos_alfabeticos)
+        return self.__livros_ordenados_por_generos_alfabeticos
+
+
+    @classmethod
     def busca_dados_por_titulo_do_livro(self : object, titulo_do_livro : str, lista_de_livros : list) -> object or bool:
         for livro in range(len(lista_de_livros)):
             if titulo_do_livro in lista_de_livros[livro].titulo_do_livro:
@@ -124,12 +165,34 @@ class Livro:
 
 
     @classmethod
-    def exibe_todos_os_livros(self : object, lista_de_livros : list) -> str:
+    def exibe_todos_os_livros(self : object, lista_de_livros : list, tipo_de_lista : int=1) -> str:
         cabecalho('Livros Cadastrados na Biblioteca:')
-        for i in range(len(lista_de_livros)):
-            print(f'{lista_de_livros[i].titulo_do_livro}')
+        for livro in range(len(lista_de_livros)):
+            if tipo_de_lista == 1:
+                print(f'{lista_de_livros[livro].titulo_do_livro}')
+
+            else:
+                for busca in range(len(lista_de_livros)):
+                    print(f'{lista_de_livros[livro][busca]}')
+
             sleep(1)
-    
+
+
+    def exibe_livros_alfabeticamente(self : object, lista_de_livros : list) -> str:
+        cabecalho('Exibindo Todos os Livros Alfabeticamente')
+        for livro in range(len(lista_de_livros)):
+            print(f'{lista_de_livros[livro]}')
+            sleep(1)
+
+
+
+    @classmethod
+    def exibe_todos_os_generos(self : object, lista_de_generos : list) -> str:
+        cabecalho('Os Gêneros de Todos os Livros Cadastrados na Biblioteca São:')
+        for genero in range(len(lista_de_generos)):
+            print(f'{lista_de_generos[genero]}')
+            sleep(1)
+
 
     @classmethod
     def exibe_dados_do_livro(self : object, livro : str) -> str: #Depois que os dados do livro forem retornados
