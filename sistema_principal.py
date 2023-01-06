@@ -27,25 +27,28 @@ while opcao_menu != 4:
 
         elif opcao_exibicao == 2:
             livros_ordem_alfabetica = Livro.ordena_livros_alfabeticamente(lista_de_livros)
-            Livro.exibe_livros_alfabeticamente(Livro, livros_ordem_alfabetica)
+            Livro.exibe_livros_alfabeticamente(livros_ordem_alfabetica)
     
         elif opcao_exibicao == 3:
             Livro.exibe_todos_os_generos(lista_de_generos)
 
         else:
-            generos_ordem_alfabetica = Livro.ordena_genero_alfabeticamente(lista_de_generos)
+            generos_ordem_alfabetica = Genero.ordena_genero_alfabeticamente(lista_de_generos)
             livros_alfabeticamente_genero = Livro.ordena_livros_alfabeticamente_por_genero(generos_ordem_alfabetica, lista_de_livros)
-            Livro.exibe_todos_os_livros(livros_alfabeticamente_genero, 3)
+            Livro.exibe_livros_alfabeticamente_por_genero(generos_ordem_alfabetica, livros_alfabeticamente_genero)
 
     elif opcao_menu == 2:
         cabecalho('Cadastro de Novo Livro')
 
         titulo_do_livro = str(input('Informe o título do livro: ')).strip().title()
         autor_do_livro = str(input('Informe o autor do livro: ')).strip().title()
+        nacionalidade_do_autor = str(input('Digite o país do autor: ')).strip().title()
+        sexo_do_autor = str(input('Digite o sexo do autor: ')).strip().title()
         genero_do_livro = str(input('Informe o gênero do livro: ')).strip().title()
+        subgenero_do_livro = str(input('Digite o subgênero do livro: ')).strip().title()
         quantidade_de_paginas = ler_inteiro('Informe a quantidade de páginas: ')
 
-        livro = Livro(titulo_do_livro, autor_do_livro, genero_do_livro, quantidade_de_paginas)
+        livro = Livro(titulo_do_livro, autor_do_livro, nacionalidade_do_autor, sexo_do_autor, genero_do_livro, subgenero_do_livro, quantidade_de_paginas)
         Livro.registrar_livro_no_arquivo(livro, arquivo)
         sleep(1.5)
 
@@ -112,7 +115,6 @@ while opcao_menu != 4:
 
             else:
                 print('Opção digitada não é valida! Por favor, tente novamente')
-                sleep(1)
                 opcao_menu = menu(['Ver Livros da Biblioteca', 'Cadastrar Livro', 'Buscar Livro', 'Sair do Sistema'])
 
 
