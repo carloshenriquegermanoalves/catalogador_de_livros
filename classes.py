@@ -220,17 +220,39 @@ class Livro(Genero):
     def altera_quantidade_de_paginas(self : object, nova_quantidade_de_paginas : str) -> None:
         self.__quantidade_de_paginas = nova_quantidade_de_paginas
 
+    
+    @property
+    def ano_de_leitura(self : object) -> int:
+        return self.__ano_de_leitura
+
+
+    @ano_de_leitura.setter
+    def altera_ano_de_leitura(self : object, ano_de_leitura_alterado : int) -> None:
+        self.__ano_de_leitura = ano_de_leitura_alterado
+
+
+    @property
+    def nota_do_livro(self : object) -> float:
+        return self.__nota_do_livro
+
+    
+    @nota_do_livro.setter
+    def altera_nota_do_livro(self : object, nova_nota_do_livro : float) -> None:
+        self.__nota_do_livro = nova_nota_do_livro
+
 
     @classmethod
     def registrar_livro_no_arquivo(self : object, livro : str, arquivo : str) -> None:
         try:
             abrir_arquivo = open(arquivo, 'at')
-        except:
+        except Exception as e:
+            print(e)
             print('Alguma coisa deu errada enquanto as informações estavam sendo processadas! Vamos tentar de novo!')
         else:
             try:
-                abrir_arquivo.write(f' {livro.titulo_do_livro} - {livro.nome_do_autor} - {livro.nacionalidade_do_autor} - {livro.sexo_do_autor} - {livro.genero_do_livro} - {livro.subgenero_do_livro} - {livro.quantidade_de_paginas} -\n')
-            except:
+                abrir_arquivo.write(f' {livro.titulo_do_livro} - {livro.nome_do_autor} - {livro.nacionalidade_do_autor} - {livro.sexo_do_autor} - {livro.genero_do_livro} - {livro.subgenero_do_livro} - {livro.quantidade_de_paginas} - {livro.ano_de_leitura} - {livro.nota_do_livro} - \n')
+            except Exception as e:
+                print(e)
                 print('Alguma coisa deu errado quando as informações estavam sendo salvas! Vamos tentar novamente!')
             else:
                 print(f'Um novo registro para o livro {livro.titulo_do_livro} foi criado!')
@@ -244,7 +266,7 @@ class Livro(Genero):
             arquivo = open(arquivo, 'r')
             for item in arquivo.readlines():
                 dados = item.split('-')
-                livro = Livro(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5], dados[6])
+                livro = Livro(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5], dados[6], dados[7], dados[8])
                 self.__lista_de_livros.append(livro)
         return self.__lista_de_livros
 
@@ -306,6 +328,14 @@ class Livro(Genero):
         return self.__livros_do_autor_informado
 
 
+    def busca_livros_nacionalidade_autor(self : object, nacionalidade_autor : str, lista_de_livros : list) -> list:
+        self.__livros_nacionalidade_informada = []
+        for nacionalidade in range(len(lista_de_livros)):
+            if nacionalidade_autor in lista_de_livros[nacionalidade].nacionalidade_do_autor:
+                self.__livros_nacionalidade_informada.append(lista_de_livros[nacionalidade].titulo_do_livro)
+        return self.__livros_nacionalidade_informada
+
+
     @classmethod
     def busca_livros_por_genero(self : object, genero_do_livro : str, lista_de_livros: list) -> list:
         if len(genero_do_livro) > 0:
@@ -337,29 +367,36 @@ class Livro(Genero):
 
 
     @classmethod
+    def busca_livros_por_ano(self : object, lista_de_livros : list, ano_informado : int) -> list:
+        self.__livros_ano_informado = []
+        for livro in range(len(lista_de_livros)):
+            if ano_informado == int(lista_de_livros[livro].ano_de_leitura):
+                self.__livros_ano_informado.append(lista_de_livros[livro].titulo_do_livro)
+        return self.__livros_ano_informado
+
+
+    @classmethod
     def mensagem_sem_livro(self : object) -> str:
         cabecalho('Não Há Livros Cadastrados na Biblioteca')
 
 
     @classmethod
-    def exibe_todos_os_livros(self : object, lista_de_livros : list) -> str:
+    def exibe_livros(self : object, lista_de_livros : list) -> str:
         if len(lista_de_livros) > 0:
-            cabecalho('Livros Cadastrados na Biblioteca:')
             for livro in range(len(lista_de_livros)):
                 sleep(1)
-                print(f'{lista_de_livros[livro].titulo_do_livro}')
+                print(f'{lista_de_livros[livro]}')
         else:
             Livro.mensagem_sem_livro()
         sleep(1)
 
 
     @classmethod
-    def exibe_livros_alfabeticamente(self : object, lista_de_livros : list) -> str:
+    def exibe_todos_os_livros(self : object, lista_de_livros : list) -> str:
         if len(lista_de_livros) > 0:
-            cabecalho('Exibindo Todos os Livros Alfabeticamente')
             for livro in range(len(lista_de_livros)):
                 sleep(1)
-                print(f'{lista_de_livros[livro]}')
+                print(f'{lista_de_livros[livro].titulo_do_livro}')
         else:
             Livro.mensagem_sem_livro()
         sleep(1)
@@ -394,30 +431,4 @@ class Livro(Genero):
         print(f'Subgênero do Livro - {livro.subgenero_do_livro}')
         sleep(1)
         print(f'Quantidade de páginas - {livro.quantidade_de_paginas}')
-        sleep(1)
-
-
-    @classmethod
-    def exibe_livros_encontrados_por_buscas(self : object, livros_encontrados : list) -> str:
-        for livro in range(len(livros_encontrados)):
-            sleep(1)
-            print(f'{livros_encontrados[livro]}')
-        sleep(1)
-
-
-    @classmethod
-    def exibe_livros_autores(self : object, lista_livros_autores : list) -> list:
-        cabecalho('Os Livros Escritos Por Homens Cadastrados na Biblioteca São')
-        for livro in range(len(lista_livros_autores)):
-            sleep(1)
-            print(f'{lista_livros_autores[livro]}')
-        sleep(1)
-
-
-    @classmethod
-    def exibe_livros_autoras(self: object, lista_livros_autoras : list) -> list:
-        cabecalho('Os Livros Escritos Por Mulheres Cadastradas na Biblioteca São')
-        for livro in range(len(lista_livros_autoras)):
-            sleep(1)
-            print(f'{lista_livros_autoras[livro]}')
         sleep(1)
