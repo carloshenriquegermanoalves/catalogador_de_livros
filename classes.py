@@ -15,29 +15,14 @@ class Autor:
         return self.__nome_do_autor
 
 
-    @nome_do_autor.setter
-    def alterar_nome_do_autor(self : object, novo_nome_do_autor : str) -> None:
-        self.__nome_do_autor = novo_nome_do_autor
-
-
     @property
     def nacionalidade_do_autor(self : object) -> str:
         return self.__nacionalidade_do_autor
 
 
-    @nacionalidade_do_autor.setter
-    def alterar_nacionalidade_do_autor(self : object, nova_nacionalidade_do_autor : str) -> None:
-        self.__nacionalidade_do_autor = nova_nacionalidade_do_autor
-
-
     @property
     def sexo_do_autor(self : object) -> str:
         return self.__sexo_do_autor
-
-
-    @sexo_do_autor.setter
-    def sexo_do_autor(self : object, novo_sexo_do_autor : str) -> None:
-        self.__sexo_do_autor = novo_sexo_do_autor
 
 
     @classmethod
@@ -144,19 +129,9 @@ class Genero(Autor):
         return self.__genero_do_livro
 
 
-    @genero_do_livro.setter
-    def alterar_genero_do_livro(self : object, novo_genero : str) -> None:
-        self.__genero_do_livro = novo_genero
-
-
     @property
     def subgenero_do_livro(self : object) -> str:
         return self.__subgenero_do_livro
-
-
-    @subgenero_do_livro.setter
-    def alterar_subgenero_do_livro(self : object, novo_subgenero : str) -> None:
-        self.__subgenero_do_livro = novo_subgenero
 
 
     @classmethod
@@ -206,19 +181,9 @@ class Livro(Genero):
         return self.__titulo_do_livro
 
 
-    @titulo_do_livro.setter
-    def alterar_titulo_do_livro(self : object, novo_titulo_do_livro: str) -> None:
-        self.__titulo_do_livro = novo_titulo_do_livro
-
-
     @property
     def quantidade_de_paginas(self: object) -> int:
         return self.__quantidade_de_paginas
-
-
-    @quantidade_de_paginas.setter
-    def altera_quantidade_de_paginas(self : object, nova_quantidade_de_paginas : str) -> None:
-        self.__quantidade_de_paginas = nova_quantidade_de_paginas
 
     
     @property
@@ -226,33 +191,21 @@ class Livro(Genero):
         return self.__ano_de_leitura
 
 
-    @ano_de_leitura.setter
-    def altera_ano_de_leitura(self : object, ano_de_leitura_alterado : int) -> None:
-        self.__ano_de_leitura = ano_de_leitura_alterado
-
-
     @property
     def nota_do_livro(self : object) -> float:
         return self.__nota_do_livro
-
-    
-    @nota_do_livro.setter
-    def altera_nota_do_livro(self : object, nova_nota_do_livro : float) -> None:
-        self.__nota_do_livro = nova_nota_do_livro
 
 
     @classmethod
     def registrar_livro_no_arquivo(self : object, livro : str, arquivo : str) -> None:
         try:
             abrir_arquivo = open(arquivo, 'at')
-        except Exception as e:
-            print(e)
+        except:
             print('Alguma coisa deu errada enquanto as informações estavam sendo processadas! Vamos tentar de novo!')
         else:
             try:
                 abrir_arquivo.write(f' {livro.titulo_do_livro} - {livro.nome_do_autor} - {livro.nacionalidade_do_autor} - {livro.sexo_do_autor} - {livro.genero_do_livro} - {livro.subgenero_do_livro} - {livro.quantidade_de_paginas} - {livro.ano_de_leitura} - {livro.nota_do_livro} - \n')
-            except Exception as e:
-                print(e)
+            except:
                 print('Alguma coisa deu errado quando as informações estavam sendo salvas! Vamos tentar novamente!')
             else:
                 print(f'Um novo registro para o livro {livro.titulo_do_livro} foi criado!')
@@ -394,6 +347,7 @@ class Livro(Genero):
     @classmethod
     def exibe_todos_os_livros(self : object, lista_de_livros : list) -> str:
         if len(lista_de_livros) > 0:
+            cabecalho('Livros Cadastrados na Biblioteca:')
             for livro in range(len(lista_de_livros)):
                 sleep(1)
                 print(f'{lista_de_livros[livro].titulo_do_livro}')

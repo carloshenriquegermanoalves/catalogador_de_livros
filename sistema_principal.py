@@ -11,24 +11,22 @@ if verifica_arquivo(arquivo) == False:
 
 opcao_menu = 0
 
-while opcao_menu != 5:
+while opcao_menu != 4:
     lista_de_livros = Livro.listar_livros_do_arquivo(arquivo)
     lista_de_generos = Livro.lista_generos(lista_de_livros)
     
     cabecalho('MENU PRINCIPAL')
-    opcao_menu = menu(['Área de Exibição', 'Área de Cadastro', 'Área de Busca', 'Área de Edição', 'Sair do Sistema'])
+    opcao_menu = menu(['Área de Exibição', 'Área de Cadastro', 'Área de Busca', 'Sair do Sistema'])
 
     if opcao_menu == 1:
         cabecalho('MENU DE EXIBIÇÃO')
         opcao_exibicao = menu(['Ordem de Aquisição', 'Ordem Alfabética', 'Lista de Gêneros','Lista de Autores','Ordenados Alfabeticamente por Gêneros'])
         
         if opcao_exibicao == 1:
-            cabecalho('Livros Cadastrados na Biblioteca:')
             Livro.exibe_todos_os_livros(lista_de_livros)
 
         elif opcao_exibicao == 2:
             livros_ordem_alfabetica = Livro.ordena_livros_alfabeticamente(lista_de_livros)
-            cabecalho('Exibindo Todos os Livros Alfabeticamente')
             Livro.exibe_livros(livros_ordem_alfabetica)
     
         elif opcao_exibicao == 3:
@@ -203,11 +201,17 @@ while opcao_menu != 5:
                 else:
                     cabecalho(f'Não foram lidos nenhum dos livros cadastrados em {ano_para_busca}')
 
-    elif opcao_menu == 4:
-        cabecalho('MENU DE EDIÇÃO')
+            elif opcao_de_busca == 2:
+                ano_para_busca = 0
+                livros_nao_lidos = Livro.busca_livros_por_ano(lista_de_livros, ano_para_busca)
+                if len(livros_nao_lidos) > 0:
+                    cabecalho('Os livros que ainda não foram lidos são')
+                    Livro.exibe_livros(livros_nao_lidos)
+                else:
+                    cabecalho('Não há livros cadastrados na biblioteca que não foram lidos! Parabéns!')
 
-        escolha_edicao = menu(['Alterar Título do Livro', 'Alterar Nome do Autor', 'Alterar Nacionalidade do Autor', 'Alterar Sexo do Autor', 'Alterar Gênero do Livro', 'Alterar Subgênero do Livro', 'Alterar Quantidade de Páginas do Livro'])
-
+            else:
+                reinicia_menu(8)
 
     else:
         reinicia_menu(0)
