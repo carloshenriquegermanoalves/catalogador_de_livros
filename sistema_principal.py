@@ -125,6 +125,8 @@ while opcao_menu != 4:
                 else:
                     Livro.exibe_dados_do_livro(procura_livro)
 
+                sleep(1)
+
             elif buscar_livro == 2:
                 genero_para_busca = input('Informe o gênero do livro para busca: ').strip().title()
                 livros_do_genero = Livro.busca_livros_por_genero(genero_para_busca, lista_de_livros)
@@ -134,7 +136,7 @@ while opcao_menu != 4:
                 else:
                     cabecalho(f'Não foi encontrado nenhum livro do gênero {genero_para_busca}')
 
-            elif buscar_livro == 4:
+            elif buscar_livro == 3:
                 tipo_de_busca = menu(['Buscar livros com a quantidade de páginas maior ou igual ao informado', 'Buscar livros com a quantidade de páginas menor ou igual ao informado'])
                 if tipo_de_busca not in [1, 2]:
                     reinicia_menu(4)
@@ -167,19 +169,19 @@ while opcao_menu != 4:
             elif buscar_autor == 2:
                 livros_femininos = Livro.livros_autoras(lista_de_livros)
                 cabecalho('Os Livros Escritos Por Mulheres Cadastradas na Biblioteca São')
-                Livro.exibe_livros(lista_de_livros)
+                Livro.exibe_livros(livros_femininos)
 
             elif buscar_autor == 3:
                 autor_para_busca = str(input('Informe o autor para busca: ')).strip().title()
                 livros_do_autor = Livro.busca_livros_por_autor(autor_para_busca, lista_de_livros)
                 if len(livros_do_autor) > 0:
                     cabecalho(f'Os livros do autor {autor_para_busca} são:')
-                    Livro.exibe_livros_encontrados_por_buscas(livros_do_autor)
+                    Livro.exibe_livros(livros_do_autor)
                 else:
                     cabecalho(f'Não foi encontrado nenhum livro do autor {autor_para_busca}')
             
             elif buscar_autor == 4:
-                nacionalidade_para_busca = str(input('Informe o país do autor para a busca: '))
+                nacionalidade_para_busca = str(input('Informe o país do autor para a busca: ')).strip().title()
                 livros_nacionalidade_informada = Livro.busca_livros_nacionalidade_autor(nacionalidade_para_busca, lista_de_livros)
                 if len(livros_nacionalidade_informada) > 0:
                     cabecalho(f'Os Livros Escritos por Autores do País {nacionalidade_para_busca} são')
@@ -214,7 +216,9 @@ while opcao_menu != 4:
                 reinicia_menu(8)
 
     else:
-        reinicia_menu(0)
+        if opcao_menu != 4: 
+            reinicia_menu(0)
+
 
 print('Fechando o sistema. Volte sempre. . .')
 exit(0)

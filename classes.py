@@ -39,7 +39,7 @@ class Autor:
         livros_femininos = 0
         for autor in range(len(lista_de_livros)):
             if 'Feminino' in lista_de_livros[autor].sexo_do_autor:
-                livros_femininos += 0
+                livros_femininos += 1
         return livros_femininos
 
 
@@ -281,6 +281,7 @@ class Livro(Genero):
         return self.__livros_do_autor_informado
 
 
+    @classmethod
     def busca_livros_nacionalidade_autor(self : object, nacionalidade_autor : str, lista_de_livros : list) -> list:
         self.__livros_nacionalidade_informada = []
         for nacionalidade in range(len(lista_de_livros)):
